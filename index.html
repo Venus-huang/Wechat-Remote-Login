@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>微信登录助手</title>
+    <style>
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+        .button {
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .login-button {
+            background-color: #07C160;
+        }
+        .login-button:hover {
+            background-color: #06AD56;
+        }
+        .template-button {
+            background-color: #1E90FF;
+        }
+        .template-button:hover {
+            background-color: #187CDC;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="button login-button" onclick="sendLoginRequest()">登录</button>
+        <button class="button template-button" onclick="saveTemplate()">保存模板</button>
+    </div>
+    <script>
+        function sendLoginRequest() {
+            fetch('http://192.168.66.223:5001/trigger-login', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        }
+
+        function saveTemplate() {
+            fetch('http://192.168.66.223:5001/save-template', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
